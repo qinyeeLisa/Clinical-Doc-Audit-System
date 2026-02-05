@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Submit Clinical Notes - AuditCare</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark font-display text-[#111418] dark:text-white transition-colors duration-200">
+    <div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+        <div class="layout-container flex h-full grow flex-col">
+            <main class="flex-1 flex flex-col items-center">
+                <div class="max-w-[1200px] w-full px-10 py-8">
+                    <!-- Page Heading -->
+                    <div class="flex flex-wrap justify-between gap-3 mb-8">
+                        <div class="flex flex-col gap-2">
+                            <h1
+                                class="text-[#111418] dark:text-white text-4xl font-black leading-tight tracking-[-0.033em]">
+                                Submit Clinical Notes</h1>
+                            <p class="text-[#617589] dark:text-gray-400 text-lg font-normal">Enter your patient
+                                encounter details below for automated audit review and compliance check.</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                        <!-- Submission Section -->
+                        <div class="lg:col-span-2 space-y-6">
+                            <div
+                                class="bg-white dark:bg-[#1a2632] p-6 rounded-xl border border-[#dbe0e6] dark:border-[#2d394a] shadow-sm">
+                                <div class="flex flex-col gap-4">
+                                    <label class="flex flex-col">
+                                        <div class="flex items-center gap-2 mb-2">
+                                            <span
+                                                class="material-symbols-outlined text-primary text-xl">description</span>
+                                            <p class="text-[#111418] dark:text-white text-base font-semibold">Clinical
+                                                Documentation</p>
+                                        </div>
+                                        <textarea
+                                            class="form-input flex w-full min-w-0 flex-1 resize-none rounded-lg text-[#111418] dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/20 border border-[#dbe0e6] dark:border-[#2d394a] bg-transparent focus:border-primary min-h-[400px] placeholder:text-[#617589] p-4 text-base font-normal leading-relaxed"
+                                            placeholder="Enter or paste detailed clinical notes here (e.g., S.O.A.P. notes, patient assessment, treatment plan)..."></textarea>
+                                    </label>
+                                    <div
+                                        class="flex items-center justify-between pt-4 border-t border-[#f0f2f4] dark:border-[#2d394a]">
+                                        <div class="flex gap-4">
+                                            <button
+                                                class="flex items-center gap-2 text-sm font-medium text-[#617589] dark:text-gray-400 hover:text-primary">
+                                                <span class="material-symbols-outlined text-lg">attach_file</span>
+                                                Attach PDF
+                                            </button>
+                                        </div>
+                                        <button
+                                            class="flex min-w-[160px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 shadow-md">
+                                            <span class="truncate">Submit Audit</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Side Results Placeholder -->
+                        <div class="lg:col-span-1">
+                            <div
+                                class="bg-white dark:bg-[#1a2632] rounded-xl border border-[#dbe0e6] dark:border-[#2d394a] overflow-hidden sticky top-24">
+                                <div
+                                    class="bg-primary/10 dark:bg-primary/20 p-4 border-b border-[#dbe0e6] dark:border-[#2d394a]">
+                                    <h3 class="text-[#111418] dark:text-white font-bold flex items-center gap-2">
+                                        <span class="material-symbols-outlined text-primary">analytics</span>
+                                        Audit Result Summary
+                                    </h3>
+                                </div>
+                                <div
+                                    class="p-8 flex flex-col items-center justify-center text-center gap-4 min-h-[300px]">
+                                    <div
+                                        class="w-16 h-16 rounded-full bg-background-light dark:bg-background-dark flex items-center justify-center text-[#617589]">
+                                        <span
+                                            class="material-symbols-outlined text-4xl opacity-40">pending_actions</span>
+                                    </div>
+                                    <div>
+                                        <p class="text-[#111418] dark:text-white font-semibold">Awaiting Submission</p>
+                                        <p class="text-[#617589] dark:text-gray-400 text-sm mt-2">Your audit results,
+                                            compliance score, and improvement suggestions will appear here after you
+                                            submit your notes.</p>
+                                    </div>
+                                    <div class="w-full space-y-3 mt-4">
+                                        <div
+                                            class="h-2 w-full bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden">
+                                            <div class="h-full bg-gray-200 dark:bg-gray-700 w-1/4"></div>
+                                        </div>
+                                        <div
+                                            class="flex justify-between text-[10px] text-[#617589] font-medium uppercase tracking-wider">
+                                            <span>Completeness</span>
+                                            <span>--%</span>
+                                        </div>
+                                        <div
+                                            class="h-2 w-full bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden">
+                                            <div class="h-full bg-gray-200 dark:bg-gray-700 w-1/3"></div>
+                                        </div>
+                                        <div
+                                            class="flex justify-between text-[10px] text-[#617589] font-medium uppercase tracking-wider">
+                                            <span>Compliance</span>
+                                            <span>--%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-6 p-4 bg-primary/5 dark:bg-primary/10 rounded-lg border border-primary/10">
+                                <h4 class="text-xs font-bold text-primary uppercase mb-2 tracking-widest">Quick Tip</h4>
+                                <p class="text-xs text-[#111418] dark:text-gray-300 leading-relaxed">Ensure all
+                                    abbreviations used follow the facility-approved list to maximize your documentation
+                                    quality score.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,41 @@
+<header
+    class="flex items-center justify-between whitespace-nowrap border-b border-solid border-gray-200 dark:border-gray-800 bg-white dark:bg-background-dark px-6 md:px-10 py-3">
+    <div class="flex items-center gap-4 text-primary">
+        <div class="size-6">
+            <span class="material-symbols-outlined text-3xl">medical_services</span>
+        </div>
+        <h2 class="text-[#111418] dark:text-white text-lg font-bold leading-tight tracking-[-0.015em] pr-8">AuditDoc
+            Health</h2>
+    </div>
+    <div class="flex items-center gap-8" ngIf="showMenuList">
+        <nav class="flex items-center gap-9">
+            <a class="text-[#111418] dark:text-slate-300 text-sm font-medium leading-normal hover:text-primary transition-colors"
+                routerLink="/submit-notes">Submit Notes</a>
+            <a class="text-[#111418] dark:text-slate-300 text-sm font-medium leading-normal hover:text-primary transition-colors"
+                routerLink="/clinical-history">Clinical History</a>
+        </nav>
+    </div>
+    <div class="flex flex-1 justify-end gap-6" ngIf="showMenuList">
+        <label class="flex flex-col min-w-40 !h-10 max-w-64">
+            <div class="flex w-full flex-1 items-stretch rounded-lg h-full overflow-hidden">
+                <div
+                    class="text-[#617589] flex border-none bg-slate-100 dark:bg-slate-800 items-center justify-center pl-4 border-r-0">
+                    <span class="material-symbols-outlined text-xl">search</span>
+                </div>
+                <input
+                    class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden text-[#111418] dark:text-white focus:outline-0 focus:ring-0 border-none bg-slate-100 dark:bg-slate-800 focus:border-none h-full placeholder:text-[#617589] px-4 pl-2 text-sm font-normal leading-normal"
+                    placeholder="Search records..." />
+            </div>
+        </label>
+        <div class="flex gap-2">
+            <button
+                class="flex items-center justify-center rounded-lg h-10 w-10 bg-slate-100 dark:bg-slate-800 text-[#111418] dark:text-white hover:bg-slate-200 dark:hover:bg-slate-700">
+                <span class="material-symbols-outlined text-xl">notifications</span>
+            </button>
+            <button routerLink="/login"
+                class="flex min-w-[84px] cursor-pointer items-center justify-center rounded-lg h-10 px-4 bg-primary text-sm font-bold leading-normal transition-colors hover:bg-primary/90 text-white">
+                <span class="truncate">Logout</span>
+            </button>
+        </div>
+    </div>
+</header>

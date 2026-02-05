@@ -1,0 +1,174 @@
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark font-display text-[#111418] dark:text-gray-100 antialiased min-h-screen">
+    <div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+        <div class="layout-container flex h-full grow flex-col">
+
+            <main class="flex flex-1 justify-center py-8">
+                <div class="layout-content-container flex flex-col max-w-[1200px] flex-1 px-6">
+                    <!-- Page Heading -->
+                    <div class="flex flex-wrap justify-between items-end gap-3 py-6">
+                        <div class="flex flex-col gap-2">
+                            <h1
+                                class="text-[#111418] dark:text-white text-4xl font-black leading-tight tracking-[-0.033em]">
+                                Clinical History</h1>
+                            <p class="text-[#617589] dark:text-gray-400 text-base font-normal leading-normal">Review and
+                                manage past clinical documentation audits for quality compliance.</p>
+                        </div>
+                        <button
+                            class="flex min-w-[120px] cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg h-11 px-6 bg-primary text-white text-sm font-bold leading-normal transition-all hover:bg-primary/90 shadow-sm">
+                            <span class="material-symbols-outlined text-lg">add</span>
+                            <span>New Audit</span>
+                        </button>
+                    </div>
+                    <!-- Table Section -->
+                    <div class="py-3 @container">
+                        <div
+                            class="flex overflow-hidden rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 shadow-sm">
+                            <table class="flex-1 w-full text-left border-collapse">
+                                <thead>
+                                    <tr
+                                        class="bg-gray-50 dark:bg-gray-800/50 border-b border-gray-200 dark:border-gray-800">
+                                        <th
+                                            class="px-6 py-4 text-[#111418] dark:text-white text-sm font-bold uppercase tracking-wider">
+                                            Date</th>
+                                        <th
+                                            class="px-6 py-4 text-[#111418] dark:text-white text-sm font-bold uppercase tracking-wider">
+                                            Risk Level</th>
+                                        <th
+                                            class="px-6 py-4 text-[#111418] dark:text-white text-sm font-bold uppercase tracking-wider">
+                                            Short Summary</th>
+                                        <th
+                                            class="px-6 py-4 text-[#617589] dark:text-gray-400 text-sm font-bold uppercase tracking-wider text-right">
+                                            Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+                                    <!-- Low Risk Row -->
+                                    <tr class="hover:bg-gray-50/80 dark:hover:bg-gray-800/30 transition-colors">
+                                        <td class="px-6 py-5 text-[#617589] dark:text-gray-400 text-sm font-medium">Oct
+                                            24, 2023</td>
+                                        <td class="px-6 py-5">
+                                            <span
+                                                class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400 uppercase tracking-wide">Low</span>
+                                        </td>
+                                        <td class="px-6 py-5 text-[#111418] dark:text-gray-200 text-sm font-normal">
+                                            Routine follow-up for patient #4521 - Documentation complete</td>
+                                        <td class="px-6 py-5 text-right">
+                                            <button
+                                                class="text-primary text-sm font-bold hover:underline transition-all">View
+                                                Details</button>
+                                        </td>
+                                    </tr>
+                                    <!-- Medium Risk Row -->
+                                    <tr class="hover:bg-gray-50/80 dark:hover:bg-gray-800/30 transition-colors">
+                                        <td class="px-6 py-5 text-[#617589] dark:text-gray-400 text-sm font-medium">Oct
+                                            22, 2023</td>
+                                        <td class="px-6 py-5">
+                                            <span
+                                                class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400 uppercase tracking-wide">Medium</span>
+                                        </td>
+                                        <td class="px-6 py-5 text-[#111418] dark:text-gray-200 text-sm font-normal">
+                                            Urgent diagnostic review - Cardiac assessment missing signatures</td>
+                                        <td class="px-6 py-5 text-right">
+                                            <button
+                                                class="text-primary text-sm font-bold hover:underline transition-all">View
+                                                Details</button>
+                                        </td>
+                                    </tr>
+                                    <!-- High Risk Row -->
+                                    <tr class="hover:bg-gray-50/80 dark:hover:bg-gray-800/30 transition-colors">
+                                        <td class="px-6 py-5 text-[#617589] dark:text-gray-400 text-sm font-medium">Oct
+                                            20, 2023</td>
+                                        <td class="px-6 py-5">
+                                            <span
+                                                class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400 uppercase tracking-wide">High</span>
+                                        </td>
+                                        <td class="px-6 py-5 text-[#111418] dark:text-gray-200 text-sm font-normal">
+                                            Post-operative complications audit - Critical documentation gap</td>
+                                        <td class="px-6 py-5 text-right">
+                                            <button
+                                                class="text-primary text-sm font-bold hover:underline transition-all">View
+                                                Details</button>
+                                        </td>
+                                    </tr>
+                                    <!-- Low Risk Row -->
+                                    <tr class="hover:bg-gray-50/80 dark:hover:bg-gray-800/30 transition-colors">
+                                        <td class="px-6 py-5 text-[#617589] dark:text-gray-400 text-sm font-medium">Oct
+                                            15, 2023</td>
+                                        <td class="px-6 py-5">
+                                            <span
+                                                class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400 uppercase tracking-wide">Low</span>
+                                        </td>
+                                        <td class="px-6 py-5 text-[#111418] dark:text-gray-200 text-sm font-normal">
+                                            Annual wellness check documentation - All fields verified</td>
+                                        <td class="px-6 py-5 text-right">
+                                            <button
+                                                class="text-primary text-sm font-bold hover:underline transition-all">View
+                                                Details</button>
+                                        </td>
+                                    </tr>
+                                    <!-- Medium Risk Row -->
+                                    <tr class="hover:bg-gray-50/80 dark:hover:bg-gray-800/30 transition-colors">
+                                        <td class="px-6 py-5 text-[#617589] dark:text-gray-400 text-sm font-medium">Oct
+                                            12, 2023</td>
+                                        <td class="px-6 py-5">
+                                            <span
+                                                class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400 uppercase tracking-wide">Medium</span>
+                                        </td>
+                                        <td class="px-6 py-5 text-[#111418] dark:text-gray-200 text-sm font-normal">
+                                            Pediatric vaccinations documentation - Minor inconsistencies</td>
+                                        <td class="px-6 py-5 text-right">
+                                            <button
+                                                class="text-primary text-sm font-bold hover:underline transition-all">View
+                                                Details</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- Pagination -->
+                    <div
+                        class="flex items-center justify-between p-6 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl mt-4 shadow-sm">
+                        <div class="text-[#617589] dark:text-gray-400 text-sm">
+                            Showing <span class="font-bold text-[#111418] dark:text-white">1-5</span> of <span
+                                class="font-bold text-[#111418] dark:text-white">24</span> results
+                        </div>
+                        <div class="flex items-center gap-1">
+                            <a class="flex size-10 items-center justify-center rounded-lg text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
+                                href="#">
+                                <span class="material-symbols-outlined">chevron_left</span>
+                            </a>
+                            <a class="text-sm font-bold flex size-10 items-center justify-center text-white rounded-lg bg-primary"
+                                href="#">1</a>
+                            <a class="text-sm font-medium flex size-10 items-center justify-center text-[#111418] dark:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                                href="#">2</a>
+                            <a class="text-sm font-medium flex size-10 items-center justify-center text-[#111418] dark:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                                href="#">3</a>
+                            <span class="text-gray-400 px-2">...</span>
+                            <a class="text-sm font-medium flex size-10 items-center justify-center text-[#111418] dark:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                                href="#">5</a>
+                            <a class="flex size-10 items-center justify-center rounded-lg text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
+                                href="#">
+                                <span class="material-symbols-outlined">chevron_right</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>

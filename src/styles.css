@@ -1,1 +1,11 @@
-/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com');
+
+@theme{
+    --color-primary: #137fec;
+    --backgroup-color: #f6f7f8;
+    --backgroup-dark: #101922;
+    --font-display: "Inter"; 
+    --border-radius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"};
+}
+

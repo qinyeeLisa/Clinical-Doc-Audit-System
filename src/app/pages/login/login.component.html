@@ -1,0 +1,94 @@
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <title>Login | AuditDoc Health</title>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark font-display text-[#111418] dark:text-white transition-colors duration-200">
+    <div class="relative flex min-h-90vh flex-col overflow-x-hidden">
+        <main class="flex flex-1 items-center justify-center px-4 py-12">
+            <div
+                class="w-full max-w-[480px] bg-white dark:bg-[#1c2631] rounded-xl shadow-sm border border-gray-100 dark:border-gray-800 overflow-hidden">
+                <!-- Headline Section -->
+                <div class="pt-10 pb-4 px-8 text-center">
+                    <h1 class="text-[#111418] dark:text-white tracking-light text-[32px] font-bold leading-tight pb-3">
+                        Welcome Back</h1>
+                    <p class="text-[#617589] dark:text-gray-400 text-base font-normal leading-normal">Securely login to
+                        review clinical notes and manage audits.</p>
+                </div>
+                <!-- Login Form -->
+                <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="px-8 pb-10 flex flex-col gap-4">
+                    <!-- Email Field -->
+                    <div class="flex flex-col gap-2">
+                        <label>Email Address</label>
+                        <input type="email" placeholder="Enter your professional email" formControlName="email"
+                            class="form-input flex w-full rounded-lg text-[#111418] dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-[#dbe0e6] dark:border-gray-700 bg-white dark:bg-[#101922] h-14 placeholder:text-[#617589] p-[15px] text-base font-normal" />
+                        <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
+                            class="text-red-500 text-sm">
+                            Please enter a valid email
+                        </div>
+                    </div>
+
+                    <!-- Password Field -->
+                    <div class="flex flex-col gap-2">
+                        <div class="flex justify-between items-center">
+                            <label>Password</label>
+                            <a href="#" class="text-primary text-sm font-medium hover:underline">Forgot password?</a>
+                        </div>
+                        <div class="relative flex w-full items-stretch rounded-lg">
+                            <input [type]="hidePassword ? 'password' : 'text'" placeholder="Enter your password"
+                                formControlName="password"
+                                class="form-input flex w-full rounded-lg text-[#111418] dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-[#dbe0e6] dark:border-gray-700 bg-white dark:bg-[#101922] h-14 placeholder:text-[#617589] p-[15px] text-base font-normal" />
+                            <div class="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer"
+                                (click)="togglePassword()">
+                                <span class="material-symbols-outlined">
+                                    {{ hidePassword ? 'visibility' : 'visibility_off' }}
+                                </span>
+                            </div>
+                        </div>
+                        <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+                            class="text-red-500 text-sm">
+                            Password is required
+                        </div>
+                    </div>
+
+                    <!-- Submit -->
+                    <div class="pt-4 flex flex-col gap-4">
+                        <button type="submit" class="w-full bg-primary rounded-lg h-14 text-white font-bold">
+                            Login to Dashboard
+                        </button>
+                    </div>
+
+                    <div class="flex items-center justify-center gap-2 pt-2">
+                        <p class="text-[#617589] dark:text-gray-400 text-sm">Don't have an account?</p>
+                        <a class="text-primary text-sm font-bold hover:underline" routerLink="/register">Register your
+                            clinic</a>
+                    </div>
+                </form>
+                <!-- Footer/Branding sub-info -->
+                <div class="bg-gray-50 dark:bg-[#15202b] px-8 py-4 border-t border-gray-100 dark:border-gray-800">
+                    <div class="flex items-center justify-center gap-4 text-[#617589] dark:text-gray-500 text-xs">
+                        <div class="flex items-center gap-1">
+                            <span class="material-symbols-outlined text-sm">lock</span>
+                            HIPAA Compliant
+                        </div>
+                        <div class="flex items-center gap-1">
+                            <span class="material-symbols-outlined text-sm">verified_user</span>
+                            256-bit Encryption
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+    </div>
+</body>

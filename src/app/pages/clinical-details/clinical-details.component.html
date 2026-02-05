@@ -1,0 +1,201 @@
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@400&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-[#111418] dark:text-white min-h-screen">
+    <div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+        <div class="layout-container flex h-full grow flex-col">
+            <main class="flex-1 overflow-y-auto">
+                <div class="mx-auto max-w-[1200px] w-full px-4 py-8">
+                    <!-- Breadcrumbs -->
+                    <div class="flex flex-wrap gap-2 pb-4">
+                        <a class="text-[#617589] text-sm font-medium leading-normal hover:text-primary"
+                            href="#">Audits</a>
+                        <span class="text-[#617589] text-sm font-medium leading-normal">/</span>
+                        <a class="text-[#617589] text-sm font-medium leading-normal hover:text-primary"
+                            href="#">Clinical History</a>
+                        <span class="text-[#617589] text-sm font-medium leading-normal">/</span>
+                        <span class="text-[#111418] dark:text-white text-sm font-medium leading-normal">Record
+                            #CR-8821</span>
+                    </div>
+                    <!-- PageHeading -->
+                    <div class="flex flex-wrap justify-between items-start gap-3 py-6">
+                        <div class="flex min-w-72 flex-col gap-2">
+                            <div class="flex items-center gap-3">
+                                <h1
+                                    class="text-[#111418] dark:text-white text-4xl font-black leading-tight tracking-[-0.033em]">
+                                    Clinical Record Audit: #CR-8821</h1>
+                                <span
+                                    class="px-3 py-1 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 text-xs font-bold rounded-full uppercase tracking-wider">Failed
+                                    Review</span>
+                            </div>
+                            <p class="text-[#617589] text-base font-normal leading-normal">Patient ID: PX-442 |
+                                Submitted by Dr. Sarah Jenkins on Oct 12, 2023</p>
+                        </div>
+                        <div class="flex gap-3">
+                            <button
+                                class="flex min-w-[120px] cursor-pointer items-center justify-center gap-2 rounded-lg h-10 px-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[#111418] dark:text-white text-sm font-bold hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+                                <span class="material-symbols-outlined text-lg">print</span>
+                                <span>Print</span>
+                            </button>
+                            <button
+                                class="flex min-w-[140px] cursor-pointer items-center justify-center gap-2 rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold shadow-sm hover:bg-primary/90 transition-all">
+                                <span class="material-symbols-outlined text-lg">picture_as_pdf</span>
+                                <span>Download PDF</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                        <!-- Left Column: Content -->
+                        <div class="lg:col-span-2 flex flex-col gap-8">
+                            <!-- Original Note Section -->
+                            <div
+                                class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+                                <div
+                                    class="border-b border-slate-100 dark:border-slate-800 px-6 py-4 flex justify-between items-center bg-slate-50/50 dark:bg-slate-800/50">
+                                    <h2 class="text-[#111418] dark:text-white text-[18px] font-bold">Original Clinical
+                                        Note</h2>
+                                    <span class="text-xs text-slate-500 font-medium">Character Count: 1,420</span>
+                                </div>
+                                <div class="p-6">
+                                    <div
+                                        class="bg-slate-50 dark:bg-slate-800/30 rounded-lg p-6 border border-slate-100 dark:border-slate-800 min-h-[300px]">
+                                        <p
+                                            class="text-[#111418] dark:text-slate-200 text-base leading-relaxed whitespace-pre-wrap font-display">
+                                            Subjective: Patient presents with recurring abdominal pain localized to the
+                                            right lower quadrant over the past 48 hours. Intensity 7/10. Reports nausea
+                                            but no vomiting.
+
+                                            Objective: Temp 101.2F, BP 130/85, HR 92. Guarding noted on palpation of
+                                            RLQ. Positive McBurney's sign. Psoas sign inconclusive.
+
+                                            Assessment: Suspected acute appendicitis vs mesenteric adenitis.
+
+                                            Plan: Ordered CBC, CMP, and CT abdomen/pelvis with IV contrast. Patient
+                                            advised to remain NPO. Surgical consult paged. Patient to be monitored for
+                                            signs of perforation.
+
+                                            [Additional Physician Comments Follow...]
+                                            Follow-up scheduled post-imaging. Patient appears distressed but
+                                            hemodynamically stable for now.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Explanation/Detailed Findings Section -->
+                            <div
+                                class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+                                <div
+                                    class="border-b border-slate-100 dark:border-slate-800 px-6 py-4 bg-slate-50/50 dark:bg-slate-800/50">
+                                    <h2 class="text-[#111418] dark:text-white text-[18px] font-bold">Auditor Detailed
+                                        Explanation</h2>
+                                </div>
+                                <div class="p-6">
+                                    <p class="text-[#111418] dark:text-slate-300 text-base leading-relaxed">
+                                        The clinical documentation provided for Case #CR-8821 fails to meet the required
+                                        standard for critical surgical assessment records. While basic vital signs and
+                                        symptoms are recorded, there is a significant omission regarding the patient's
+                                        surgical history, which is essential for differential diagnosis in RLQ pain.
+                                    </p>
+                                    <div
+                                        class="mt-4 p-4 bg-primary/5 dark:bg-primary/10 border-l-4 border-primary rounded-r-lg">
+                                        <p class="text-primary font-semibold text-sm mb-1 uppercase tracking-wider">
+                                            Required Corrective Action</p>
+                                        <p class="text-slate-700 dark:text-slate-300 text-sm">Please update the record
+                                            to include previous abdominal surgeries and a more detailed timeline of
+                                            symptom progression since the initial onset.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Right Column: Sidebar / Audit Stats -->
+                        <div class="flex flex-col gap-6">
+                            <!-- Compliance Status Card -->
+                            <div
+                                class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm p-6">
+                                <h3 class="text-[#111418] dark:text-white text-lg font-bold mb-4">Audit Summary</h3>
+                                <div class="space-y-4">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-slate-600 dark:text-slate-400 text-sm">Compliance
+                                            Status</span>
+                                        <span class="text-red-500 font-bold text-sm flex items-center gap-1">
+                                            <span class="material-symbols-outlined text-sm">error</span>
+                                            Non-Compliant
+                                        </span>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-slate-600 dark:text-slate-400 text-sm">Risk Severity</span>
+                                        <span
+                                            class="bg-red-500 text-white px-2 py-0.5 rounded text-[10px] font-black uppercase">High</span>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-slate-600 dark:text-slate-400 text-sm">Billing
+                                            Integrity</span>
+                                        <span class="text-orange-500 font-bold text-sm">74%</span>
+                                    </div>
+                                </div>
+                                <div class="mt-6 pt-6 border-t border-slate-100 dark:border-slate-800">
+                                    <h4 class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-4">
+                                        Compliance Checklist</h4>
+                                    <ul class="space-y-3">
+                                        <li class="flex items-start gap-3">
+                                            <span
+                                                class="material-symbols-outlined text-green-500 text-lg">check_circle</span>
+                                            <span class="text-sm text-slate-700 dark:text-slate-300">Vitals
+                                                Recorded</span>
+                                        </li>
+                                        <li class="flex items-start gap-3">
+                                            <span
+                                                class="material-symbols-outlined text-green-500 text-lg">check_circle</span>
+                                            <span class="text-sm text-slate-700 dark:text-slate-300">Differential
+                                                Diagnosis Included</span>
+                                        </li>
+                                        <li class="flex items-start gap-3">
+                                            <span class="material-symbols-outlined text-red-500 text-lg">cancel</span>
+                                            <span class="text-sm text-slate-700 dark:text-slate-300">Medical History
+                                                Verification</span>
+                                        </li>
+                                        <li class="flex items-start gap-3">
+                                            <span
+                                                class="material-symbols-outlined text-green-500 text-lg">check_circle</span>
+                                            <span class="text-sm text-slate-700 dark:text-slate-300">NPO Instructions
+                                                Verified</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Auditor Info -->
+                            <div
+                                class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm p-6">
+                                <h3
+                                    class="text-[#111418] dark:text-white text-sm font-bold mb-4 uppercase tracking-wider opacity-60">
+                                    Assigned Auditor</h3>
+                                <div class="flex items-center gap-3">
+                                    <div
+                                        class="size-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                                        <span class="material-symbols-outlined">person</span>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-bold text-[#111418] dark:text-white">Marcus Thorne</p>
+                                        <p class="text-xs text-slate-500">Senior Quality Reviewer</p>
+                                    </div>
+                                </div>
+                                <button
+                                    class="mt-4 w-full py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs font-bold rounded-lg transition-colors">
+                                    Contact Auditor
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
