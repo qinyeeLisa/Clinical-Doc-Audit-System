@@ -32,9 +32,13 @@
                         <label>Email Address</label>
                         <input type="email" placeholder="Enter your professional email" formControlName="email"
                             class="form-input flex w-full rounded-lg text-[#111418] dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-[#dbe0e6] dark:border-gray-700 bg-white dark:bg-[#101922] h-14 placeholder:text-[#617589] p-[15px] text-base font-normal" />
-                        <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
-                            class="text-red-500 text-sm">
-                            Please enter a valid email
+                        <div *ngIf="loginForm.get('email')?.touched" class="text-sm">
+                            <div *ngIf="loginForm.get('email')?.hasError('required')" class="text-red-500 text-sm">
+                                Email is required
+                            </div>
+                            <div *ngIf="loginForm.get('email')?.hasError('email')" class="text-red-500 text-sm">
+                                Please enter a valid email
+                            </div>
                         </div>
                     </div>
 
