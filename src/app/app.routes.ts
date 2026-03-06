@@ -33,7 +33,7 @@ export const routes: Routes = [
         }
     },
     {
-        path: 'clinical-details',
+        path: 'clinical-details/:case_id',
         loadComponent: () => {
             return import('./pages/clinical-details/clinical-details.component').then(m => m.ClinicalDetailsComponent);
         }

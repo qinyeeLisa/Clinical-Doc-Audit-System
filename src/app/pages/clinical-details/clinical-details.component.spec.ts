@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ClinicalDetailsComponent } from './clinical-details.component';
+import { provideHttpClient } from '@angular/common/http';
+import { provideRouter } from '@angular/router';
 
 describe('ClinicalDetailsComponent', () => {
   let component: ClinicalDetailsComponent;
@@ -8,13 +9,16 @@ describe('ClinicalDetailsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ClinicalDetailsComponent]
-    })
-    .compileComponents();
+      imports: [ClinicalDetailsComponent],
+      providers: [
+        provideHttpClient(),
+        provideRouter([])
+      ]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ClinicalDetailsComponent);
     component = fixture.componentInstance;
-    await fixture.whenStable();
+    fixture.detectChanges();
   });
 
   it('should create', () => {

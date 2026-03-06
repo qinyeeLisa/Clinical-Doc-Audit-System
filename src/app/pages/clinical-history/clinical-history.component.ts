@@ -30,6 +30,10 @@ export class ClinicalHistoryComponent {
     this.router.navigate(['/submit-notes']);
   }
 
+  navigateToClinicalDetails(caseId: string): void {
+    this.router.navigate(['/clinical-details', caseId]);
+  }
+
   getAllAuditCases(): void {
     this.http.get<any>(`${API_URL}/audit-cases`).subscribe({
       next: (data) => {
