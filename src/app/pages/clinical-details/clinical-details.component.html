@@ -2,11 +2,11 @@
   <div class="layout-container flex h-full grow flex-col">
     <main class="flex-1 overflow-y-auto">
       <div class="mx-auto max-w-[1200px] w-full px-4 py-8">
-        
+
         <!-- Debug loading state -->
-        <div class="mb-4 text-black text-sm font-bold">
+        <!-- <div class="mb-4 text-black text-sm font-bold">
           loading = {{ loading }}
-        </div>
+        </div> -->
 
         <!-- Loading -->
         <div *ngIf="loading"
@@ -21,18 +21,27 @@
         </div>
 
         <ng-container *ngIf="caseData && !loading">
-
-          <!-- Breadcrumbs -->
-          <div class="flex flex-wrap gap-2 pb-4">
-            <a class="text-[#617589] text-sm font-medium leading-normal hover:text-primary" href="#">Audits</a>
-            <span class="text-[#617589] text-sm font-medium leading-normal">/</span>
-            <a class="text-[#617589] text-sm font-medium leading-normal hover:text-primary" href="#">Clinical
-              History</a>
-            <span class="text-[#617589] text-sm font-medium leading-normal">/</span>
-            <span class="text-[#111418] dark:text-white text-sm font-medium leading-normal">
-              {{ caseData.case_id }}
-            </span>
-          </div>
+      <!-- Breadcrumbs -->
+      <div class="flex flex-wrap gap-2 pb-4">
+          <!-- Audits -->
+          <a
+            routerLink="/submit-notes"
+            class="text-[#617589] text-sm font-medium leading-normal hover:text-primary cursor-pointer">
+            Audits
+          </a>
+          <span class="text-[#617589] text-sm font-medium leading-normal">/</span>
+          <!-- Clinical History -->
+          <a
+            routerLink="/clinical-history"
+            class="text-[#617589] text-sm font-medium leading-normal hover:text-primary cursor-pointer">
+            Clinical History
+          </a>
+          <span class="text-[#617589] text-sm font-medium leading-normal">/</span>
+          <!-- Current Case -->
+          <span class="text-[#111418] dark:text-white text-sm font-medium leading-normal">
+            {{ caseData.case_id }}
+          </span>
+      </div>
 
           <!-- Page Heading -->
           <div class="flex flex-wrap justify-between items-start gap-3 py-6">
