@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { API_URL } from '../../constants';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-submit-notes',
@@ -11,19 +13,20 @@ import { RouterLink } from '@angular/router';
   styleUrls: ['./submit-notes.component.css'],
 })
 export class SubmitNotesComponent {
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private http: HttpClient, private cd: ChangeDetectorRef
+  ) { }
 
   auditCaseForm!: FormGroup;
 
-  // would normally be fetched from an API
-  patients = [
-    { id: 'patientA', name: 'Patient A' },
-    { id: 'patientB', name: 'Patient B' },
-    { id: 'patientC', name: 'Patient C' }
-  ];
+  patients: any[] = [];
+  showModal = false;
+  modalTitle = '';
+  modalMessage = '';
+  modalType: 'success' | 'error' = 'success';
 
   ngOnInit(): void {
-    // add patient selection and notes field
+    this.getPatientsData();
+
     this.auditCaseForm = this.fb.group({
       patient: ['', Validators.required],
       auditNotes: ['', Validators.required]
@@ -32,11 +35,47 @@ export class SubmitNotesComponent {
 
   onSubmit(): void {
     if (this.auditCaseForm.valid) {
-      alert('Audit case data submitted: ' + JSON.stringify(this.auditCaseForm.value));
-      // Call your audit submission API here
+      const formValue = this.auditCaseForm.value;
+
+      const payload = {
+        user_id: 'user_123',
+        patient_id: formValue.patient,
+        raw_note_text: formValue.auditNotes
+      };
+
+      console.log('Submitting payload', payload);
+
+      this.http.post(`${API_URL}/audit-cases`, payload).subscribe(
+        response => {
+          console.log('Note submitted successfully', response);
+
+          this.modalTitle = 'Success';
+          this.modalMessage = 'Audit note submitted successfully.';
+          this.modalType = 'success';
+          this.showModal = true;
+
+          this.auditCaseForm.reset();
+        },
+        error => {
+          console.error('Error submitting note', error);
+
+          this.modalTitle = 'Submission Failed';
+          this.modalMessage = 'Something went wrong while submitting the note. Please try again.';
+          this.modalType = 'error';
+          this.showModal = true;
+        }
+      );
+
     } else {
       this.auditCaseForm.markAllAsTouched();
-      console.log('Form invalid');
     }
+  }
+
+  getPatientsData(): void {
+    this.http.get<any[]>(`${API_URL}/patients`,).subscribe(data => {
+      this.patients = [data];
+      this.cd.detectChanges();
+
+    });
   }
 }

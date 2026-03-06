@@ -27,7 +27,7 @@
                             <p class="text-[#617589] dark:text-gray-400 text-base font-normal leading-normal">Review and
                                 manage past clinical documentation audits for quality compliance.</p>
                         </div>
-                        <button
+                        <button (click)="navigateToSubmitNotes()"
                             class="flex min-w-[120px] cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg h-11 px-6 bg-primary text-white text-sm font-bold leading-normal transition-all hover:bg-primary/90 shadow-sm">
                             <span class="material-symbols-outlined text-lg">add</span>
                             <span>New Audit</span>
@@ -56,84 +56,38 @@
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
-                                    <!-- Low Risk Row -->
-                                    <tr class="hover:bg-gray-50/80 dark:hover:bg-gray-800/30 transition-colors">
-                                        <td class="px-6 py-5 text-[#617589] dark:text-gray-400 text-sm font-medium">Oct
-                                            24, 2023</td>
+                                    <tr *ngFor="let item of auditCases"
+                                        class="hover:bg-gray-50/80 dark:hover:bg-gray-800/30 transition-colors">
+                                        <!-- Date -->
+                                        <td class="px-6 py-5 text-[#617589] dark:text-gray-400 text-sm font-medium">
+                                            {{ formatDate(item.created_at) }}
+                                        </td>
+
+                                        <!-- Risk Level -->
                                         <td class="px-6 py-5">
                                             <span
-                                                class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400 uppercase tracking-wide">Low</span>
+                                                class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold uppercase tracking-wide"
+                                                [ngClass]="{
+          'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400': item.risk_level === 'LOW',
+          'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400': item.risk_level === 'MEDIUM',
+          'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400': item.risk_level === 'HIGH'
+        }">
+                                                {{ item.risk_level }}
+                                            </span>
                                         </td>
+
+                                        <!-- Short Summary -->
                                         <td class="px-6 py-5 text-[#111418] dark:text-gray-200 text-sm font-normal">
-                                            Routine follow-up for patient #4521 - Documentation complete</td>
+                                            {{ item.case_id }}, PATIENT {{ item.patient_id }} - {{ item.final_verdict
+                                            }}
+                                        </td>
+
+                                        <!-- Actions -->
                                         <td class="px-6 py-5 text-right">
                                             <button
-                                                class="text-primary text-sm font-bold hover:underline transition-all">View
-                                                Details</button>
-                                        </td>
-                                    </tr>
-                                    <!-- Medium Risk Row -->
-                                    <tr class="hover:bg-gray-50/80 dark:hover:bg-gray-800/30 transition-colors">
-                                        <td class="px-6 py-5 text-[#617589] dark:text-gray-400 text-sm font-medium">Oct
-                                            22, 2023</td>
-                                        <td class="px-6 py-5">
-                                            <span
-                                                class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400 uppercase tracking-wide">Medium</span>
-                                        </td>
-                                        <td class="px-6 py-5 text-[#111418] dark:text-gray-200 text-sm font-normal">
-                                            Urgent diagnostic review - Cardiac assessment missing signatures</td>
-                                        <td class="px-6 py-5 text-right">
-                                            <button
-                                                class="text-primary text-sm font-bold hover:underline transition-all">View
-                                                Details</button>
-                                        </td>
-                                    </tr>
-                                    <!-- High Risk Row -->
-                                    <tr class="hover:bg-gray-50/80 dark:hover:bg-gray-800/30 transition-colors">
-                                        <td class="px-6 py-5 text-[#617589] dark:text-gray-400 text-sm font-medium">Oct
-                                            20, 2023</td>
-                                        <td class="px-6 py-5">
-                                            <span
-                                                class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400 uppercase tracking-wide">High</span>
-                                        </td>
-                                        <td class="px-6 py-5 text-[#111418] dark:text-gray-200 text-sm font-normal">
-                                            Post-operative complications audit - Critical documentation gap</td>
-                                        <td class="px-6 py-5 text-right">
-                                            <button
-                                                class="text-primary text-sm font-bold hover:underline transition-all">View
-                                                Details</button>
-                                        </td>
-                                    </tr>
-                                    <!-- Low Risk Row -->
-                                    <tr class="hover:bg-gray-50/80 dark:hover:bg-gray-800/30 transition-colors">
-                                        <td class="px-6 py-5 text-[#617589] dark:text-gray-400 text-sm font-medium">Oct
-                                            15, 2023</td>
-                                        <td class="px-6 py-5">
-                                            <span
-                                                class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400 uppercase tracking-wide">Low</span>
-                                        </td>
-                                        <td class="px-6 py-5 text-[#111418] dark:text-gray-200 text-sm font-normal">
-                                            Annual wellness check documentation - All fields verified</td>
-                                        <td class="px-6 py-5 text-right">
-                                            <button
-                                                class="text-primary text-sm font-bold hover:underline transition-all">View
-                                                Details</button>
-                                        </td>
-                                    </tr>
-                                    <!-- Medium Risk Row -->
-                                    <tr class="hover:bg-gray-50/80 dark:hover:bg-gray-800/30 transition-colors">
-                                        <td class="px-6 py-5 text-[#617589] dark:text-gray-400 text-sm font-medium">Oct
-                                            12, 2023</td>
-                                        <td class="px-6 py-5">
-                                            <span
-                                                class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400 uppercase tracking-wide">Medium</span>
-                                        </td>
-                                        <td class="px-6 py-5 text-[#111418] dark:text-gray-200 text-sm font-normal">
-                                            Pediatric vaccinations documentation - Minor inconsistencies</td>
-                                        <td class="px-6 py-5 text-right">
-                                            <button
-                                                class="text-primary text-sm font-bold hover:underline transition-all">View
-                                                Details</button>
+                                                class="text-primary text-sm font-bold hover:underline transition-all">
+                                                View Details
+                                            </button>
                                         </td>
                                     </tr>
                                 </tbody>
