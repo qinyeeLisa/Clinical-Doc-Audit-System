@@ -1,18 +1,6 @@
-// import { Component } from '@angular/core';
-
-// @Component({
-//   selector: 'app-clinical-details',
-//   imports: [],
-//   templateUrl: './clinical-details.component.html',
-//   styleUrl: './clinical-details.component.css',
-// })
-// export class ClinicalDetailsComponent {
-
-// }
-
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
@@ -39,15 +27,14 @@ interface AuditCase {
 export class ClinicalDetailsComponent implements OnInit {
   private http = inject(HttpClient);
   private route = inject(ActivatedRoute);
+  private cd = inject(ChangeDetectorRef);
 
-  // Change this to your API Gateway base URL
   private apiBaseUrl = 'https://ai6nsomr0m.execute-api.ap-southeast-1.amazonaws.com';
 
   caseData: AuditCase | null = null;
   loading = true;
   errorMessage = '';
 
-  // Human review form
   showHumanReview = false;
   reviewerId = 'U001';
   decision = '';
@@ -57,10 +44,15 @@ export class ClinicalDetailsComponent implements OnInit {
   submitError = '';
 
   ngOnInit(): void {
-    const caseIdFromRoute = this.route.snapshot.paramMap.get('case_id');
+    const caseId = this.route.snapshot.paramMap.get('case_id');
+    console.log('Route case_id:', caseId);
 
-    // fallback for testing if route param not ready yet
-    const caseId = caseIdFromRoute || 'CASE-2024-002';
+    if (!caseId) {
+      this.errorMessage = 'Missing case_id in route';
+      this.loading = false;
+      this.cd.detectChanges();
+      return;
+    }
 
     this.loadCase(caseId);
   }
@@ -68,17 +60,28 @@ export class ClinicalDetailsComponent implements OnInit {
   loadCase(caseId: string): void {
     this.loading = true;
     this.errorMessage = '';
+    this.cd.detectChanges();
 
-    this.http.get<AuditCase>(`${this.apiBaseUrl}/audit-cases/${caseId}`).subscribe({
+    const url = `${this.apiBaseUrl}/audit-cases/${caseId}`;
+    console.log('Calling API:', url);
+
+    this.http.get<AuditCase>(url).subscribe({
       next: (data) => {
+        console.log('API success:', data);
+
         this.caseData = data;
         this.showHumanReview = data.status === 'PENDING REVIEW';
         this.loading = false;
+
+        this.cd.detectChanges();
       },
       error: (err) => {
-        console.error('Failed to load case', err);
+        console.error('API error:', err);
+
         this.errorMessage = err?.error?.error || 'Failed to load case details.';
         this.loading = false;
+
+        this.cd.detectChanges();
       }
     });
   }
@@ -91,10 +94,12 @@ export class ClinicalDetailsComponent implements OnInit {
 
     if (!this.reviewerId || !this.decision) {
       this.submitError = 'Reviewer ID and decision are required.';
+      this.cd.detectChanges();
       return;
     }
 
     this.submitting = true;
+    this.cd.detectChanges();
 
     const payload = {
       case_id: this.caseData.case_id,
@@ -104,32 +109,21 @@ export class ClinicalDetailsComponent implements OnInit {
     };
 
     this.http.post(`${this.apiBaseUrl}/human-reviews`, payload).subscribe({
-      next: (res: any) => {
+      next: () => {
         this.submitMessage = 'Human review submitted successfully.';
         this.submitting = false;
+        this.cd.detectChanges();
 
-        // Reload case so UI updates automatically
         this.loadCase(this.caseData!.case_id);
       },
       error: (err) => {
-        console.error('Failed to submit human review', err);
+        console.error('Submit error:', err);
+
         this.submitError = err?.error?.error || 'Failed to submit human review.';
         this.submitting = false;
+        this.cd.detectChanges();
       }
     });
-  }
-
-  get statusBadgeClass(): string {
-    if (!this.caseData?.status) return 'status-default';
-
-    switch (this.caseData.status) {
-      case 'PENDING REVIEW':
-        return 'status-pending';
-      case 'COMPLETED':
-        return 'status-completed';
-      default:
-        return 'status-default';
-    }
   }
 
   get verdictText(): string {

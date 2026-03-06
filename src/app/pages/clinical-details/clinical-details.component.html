@@ -1,175 +1,305 @@
-<div class="page-wrapper">
-  <div class="page-content">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+  <div class="layout-container flex h-full grow flex-col">
+    <main class="flex-1 overflow-y-auto">
+      <div class="mx-auto max-w-[1200px] w-full px-4 py-8">
+        
+        <!-- Debug loading state -->
+        <div class="mb-4 text-black text-sm font-bold">
+          loading = {{ loading }}
+        </div>
 
-    <div *ngIf="loading" class="info-box">
-      Loading case details...
-    </div>
+        <!-- Loading -->
+        <div *ngIf="loading"
+          class="mb-4 rounded-lg bg-blue-50 border border-blue-200 text-blue-700 px-4 py-3 text-sm font-medium">
+          Loading case details...
+        </div>
 
-    <div *ngIf="errorMessage && !loading" class="error-box">
-      {{ errorMessage }}
-    </div>
+        <!-- Error -->
+        <div *ngIf="errorMessage && !loading"
+          class="mb-4 rounded-lg bg-red-50 border border-red-200 text-red-700 px-4 py-3 text-sm font-medium">
+          {{ errorMessage }}
+        </div>
 
-    <ng-container *ngIf="caseData && !loading">
+        <ng-container *ngIf="caseData && !loading">
 
-      <!-- Breadcrumb -->
-      <div class="breadcrumbs">
-        <span>Audits</span>
-        <span>/</span>
-        <span>Clinical History</span>
-        <span>/</span>
-        <span>{{ caseData.case_id }}</span>
-      </div>
-
-      <!-- Header -->
-      <div class="page-header">
-        <div>
-          <div class="header-top">
-            <h1>Clinical Record Audit: {{ caseData.case_id }}</h1>
-            <span class="status-pill" [ngClass]="statusBadgeClass">
-              {{ caseData.status }}
+          <!-- Breadcrumbs -->
+          <div class="flex flex-wrap gap-2 pb-4">
+            <a class="text-[#617589] text-sm font-medium leading-normal hover:text-primary" href="#">Audits</a>
+            <span class="text-[#617589] text-sm font-medium leading-normal">/</span>
+            <a class="text-[#617589] text-sm font-medium leading-normal hover:text-primary" href="#">Clinical
+              History</a>
+            <span class="text-[#617589] text-sm font-medium leading-normal">/</span>
+            <span class="text-[#111418] dark:text-white text-sm font-medium leading-normal">
+              {{ caseData.case_id }}
             </span>
           </div>
-          <p class="subtext">
-            Patient ID: {{ caseData.patient_id }} |
-            Submitted by {{ caseData.created_by }} |
-            Last updated: {{ caseData.updated_at }}
-          </p>
-        </div>
+
+          <!-- Page Heading -->
+          <div class="flex flex-wrap justify-between items-start gap-3 py-6">
+            <div class="flex min-w-72 flex-col gap-2">
+              <div class="flex items-center gap-3 flex-wrap">
+                <h1 class="text-[#111418] dark:text-white text-4xl font-black leading-tight tracking-[-0.033em]">
+                  Clinical Record Audit: {{ caseData.case_id }}
+                </h1>
+
+                <span
+                  class="px-3 py-1 text-xs font-bold rounded-full uppercase tracking-wider"
+                  [ngClass]="{
+                    'bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400': caseData.status === 'PENDING REVIEW',
+                    'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400': caseData.status === 'COMPLETED'
+                  }">
+                  {{ caseData.status }}
+                </span>
+              </div>
+
+              <p class="text-[#617589] text-base font-normal leading-normal">
+                Patient ID: {{ caseData.patient_id }} |
+                Submitted by {{ caseData.created_by }} |
+                Last updated: {{ caseData.updated_at }}
+              </p>
+            </div>
+
+            <div class="flex gap-3">
+              <button
+                class="flex min-w-[120px] cursor-pointer items-center justify-center gap-2 rounded-lg h-10 px-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[#111418] dark:text-white text-sm font-bold hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+                <span class="material-symbols-outlined text-lg">print</span>
+                <span>Print</span>
+              </button>
+
+              <button
+                class="flex min-w-[140px] cursor-pointer items-center justify-center gap-2 rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold shadow-sm hover:bg-primary/90 transition-all">
+                <span class="material-symbols-outlined text-lg">picture_as_pdf</span>
+                <span>Download PDF</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+            <!-- Left Column -->
+            <div class="lg:col-span-2 flex flex-col gap-8">
+
+              <!-- Audit Case Summary -->
+              <div
+                class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+                <div
+                  class="border-b border-slate-100 dark:border-slate-800 px-6 py-4 bg-slate-50/50 dark:bg-slate-800/50">
+                  <h2 class="text-[#111418] dark:text-white text-[18px] font-bold">Audit Case Summary</h2>
+                </div>
+
+                <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <p class="text-xs uppercase tracking-wider text-slate-500 font-bold mb-1">Case ID</p>
+                    <p class="text-sm text-[#111418] dark:text-white font-medium">{{ caseData.case_id }}</p>
+                  </div>
+                  <div>
+                    <p class="text-xs uppercase tracking-wider text-slate-500 font-bold mb-1">Status</p>
+                    <p class="text-sm text-[#111418] dark:text-white font-medium">{{ caseData.status }}</p>
+                  </div>
+                  <div>
+                    <p class="text-xs uppercase tracking-wider text-slate-500 font-bold mb-1">Risk Level</p>
+                    <p class="text-sm text-[#111418] dark:text-white font-medium">{{ riskText }}</p>
+                  </div>
+                  <div>
+                    <p class="text-xs uppercase tracking-wider text-slate-500 font-bold mb-1">Final Verdict</p>
+                    <p class="text-sm text-[#111418] dark:text-white font-medium">{{ verdictText }}</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Original Note Section -->
+              <div
+                class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+                <div
+                  class="border-b border-slate-100 dark:border-slate-800 px-6 py-4 flex justify-between items-center bg-slate-50/50 dark:bg-slate-800/50">
+                  <h2 class="text-[#111418] dark:text-white text-[18px] font-bold">Original Clinical Note</h2>
+                  <span class="text-xs text-slate-500 font-medium">Character Count: 1,420</span>
+                </div>
+
+                <div class="p-6">
+                  <div
+                    class="bg-slate-50 dark:bg-slate-800/30 rounded-lg p-6 border border-slate-100 dark:border-slate-800 min-h-[300px]">
+                    <p class="text-[#111418] dark:text-slate-200 text-base leading-relaxed whitespace-pre-wrap font-display">
+Subjective: Patient presents with recurring abdominal pain localized to the right lower quadrant over the past 48 hours. Intensity 7/10. Reports nausea but no vomiting.
+
+Objective: Temp 101.2F, BP 130/85, HR 92. Guarding noted on palpation of RLQ. Positive McBurney's sign. Psoas sign inconclusive.
+
+Assessment: Suspected acute appendicitis vs mesenteric adenitis.
+
+Plan: Ordered CBC, CMP, and CT abdomen/pelvis with IV contrast. Patient advised to remain NPO. Surgical consult paged. Patient to be monitored for signs of perforation.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Explanation / Findings Section -->
+              <div
+                class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+                <div
+                  class="border-b border-slate-100 dark:border-slate-800 px-6 py-4 bg-slate-50/50 dark:bg-slate-800/50">
+                  <h2 class="text-[#111418] dark:text-white text-[18px] font-bold">Auditor Detailed Explanation</h2>
+                </div>
+
+                <div class="p-6">
+                  <p class="text-[#111418] dark:text-slate-300 text-base leading-relaxed">
+                    This case has been assessed by the audit pipeline. Please review the summary and, if required,
+                    complete the human review below.
+                  </p>
+
+                  <div
+                    class="mt-4 p-4 bg-primary/5 dark:bg-primary/10 border-l-4 border-primary rounded-r-lg">
+                    <p class="text-primary font-semibold text-sm mb-1 uppercase tracking-wider">
+                      Required Corrective Action
+                    </p>
+                    <p class="text-slate-700 dark:text-slate-300 text-sm">
+                      Review the case findings and confirm whether the audit result should be accepted or rejected.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Human Review Panel -->
+              <div *ngIf="showHumanReview"
+                class="bg-white dark:bg-slate-900 rounded-xl border-2 border-amber-400 dark:border-amber-500 shadow-sm overflow-hidden">
+                <div
+                  class="border-b border-slate-100 dark:border-slate-800 px-6 py-4 bg-amber-50/60 dark:bg-amber-900/10">
+                  <h2 class="text-[#111418] dark:text-white text-[18px] font-bold">Human Review Required</h2>
+                </div>
+
+                <div class="p-6">
+                  <p class="text-sm text-slate-700 dark:text-slate-300 mb-5">
+                    This case is currently marked as <strong>PENDING REVIEW</strong>.
+                    Please review and submit your decision.
+                  </p>
+
+                  <div class="mb-4">
+                    <label for="reviewerId" class="block text-sm font-bold text-[#111418] dark:text-white mb-2">
+                      Reviewer ID
+                    </label>
+                    <input
+                      id="reviewerId"
+                      type="text"
+                      [(ngModel)]="reviewerId"
+                      placeholder="Enter reviewer ID"
+                      class="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-4 py-3 text-sm text-[#111418] dark:text-white focus:outline-none focus:ring-2 focus:ring-primary"
+                    />
+                  </div>
+
+                  <div class="mb-4">
+                    <label class="block text-sm font-bold text-[#111418] dark:text-white mb-2">Decision</label>
+                    <div class="flex gap-6 flex-wrap">
+                      <label class="flex items-center gap-2 text-sm text-[#111418] dark:text-white">
+                        <input type="radio" name="decision" value="AGREE" [(ngModel)]="decision" />
+                        <span>AGREE</span>
+                      </label>
+
+                      <label class="flex items-center gap-2 text-sm text-[#111418] dark:text-white">
+                        <input type="radio" name="decision" value="DISAGREE" [(ngModel)]="decision" />
+                        <span>DISAGREE</span>
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="mb-4">
+                    <label for="comments" class="block text-sm font-bold text-[#111418] dark:text-white mb-2">
+                      Comments
+                    </label>
+                    <textarea
+                      id="comments"
+                      rows="5"
+                      [(ngModel)]="comments"
+                      placeholder="Enter reviewer comments"
+                      class="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-4 py-3 text-sm text-[#111418] dark:text-white focus:outline-none focus:ring-2 focus:ring-primary"
+                    ></textarea>
+                  </div>
+
+                  <div *ngIf="submitMessage"
+                    class="mb-4 rounded-lg bg-green-50 border border-green-200 text-green-700 px-4 py-3 text-sm font-medium">
+                    {{ submitMessage }}
+                  </div>
+
+                  <div *ngIf="submitError"
+                    class="mb-4 rounded-lg bg-red-50 border border-red-200 text-red-700 px-4 py-3 text-sm font-medium">
+                    {{ submitError }}
+                  </div>
+
+                  <button
+                    class="flex min-w-[180px] cursor-pointer items-center justify-center gap-2 rounded-lg h-11 px-6 bg-primary text-white text-sm font-bold leading-normal transition-all hover:bg-primary/90 shadow-sm"
+                    (click)="submitHumanReview()"
+                    [disabled]="submitting">
+                    {{ submitting ? 'Submitting...' : 'Submit Human Review' }}
+                  </button>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Right Column -->
+            <div class="flex flex-col gap-6">
+
+              <!-- Audit Summary -->
+              <div
+                class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm p-6">
+                <h3 class="text-[#111418] dark:text-white text-lg font-bold mb-4">Audit Summary</h3>
+
+                <div class="space-y-4">
+                  <div class="flex items-center justify-between">
+                    <span class="text-slate-600 dark:text-slate-400 text-sm">Compliance Status</span>
+                    <span class="text-sm font-bold text-[#111418] dark:text-white">
+                      {{ verdictText }}
+                    </span>
+                  </div>
+
+                  <div class="flex items-center justify-between">
+                    <span class="text-slate-600 dark:text-slate-400 text-sm">Risk Severity</span>
+                    <span
+                      class="px-2 py-0.5 rounded text-[10px] font-black uppercase"
+                      [ngClass]="{
+                        'bg-green-500 text-white': caseData.risk_level === 'LOW',
+                        'bg-amber-500 text-white': caseData.risk_level === 'MEDIUM',
+                        'bg-red-500 text-white': caseData.risk_level === 'HIGH'
+                      }">
+                      {{ riskText }}
+                    </span>
+                  </div>
+
+                  <div class="flex items-center justify-between">
+                    <span class="text-slate-600 dark:text-slate-400 text-sm">Case Status</span>
+                    <span class="text-sm font-bold text-[#111418] dark:text-white">
+                      {{ caseData.status }}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Assigned Auditor -->
+              <div
+                class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm p-6">
+                <h3 class="text-[#111418] dark:text-white text-sm font-bold mb-4 uppercase tracking-wider opacity-60">
+                  Assigned Auditor
+                </h3>
+
+                <div class="flex items-center gap-3">
+                  <div class="size-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                    <span class="material-symbols-outlined">person</span>
+                  </div>
+                  <div>
+                    <p class="text-sm font-bold text-[#111418] dark:text-white">Marcus Thorne</p>
+                    <p class="text-xs text-slate-500">Senior Quality Reviewer</p>
+                  </div>
+                </div>
+
+                <button
+                  class="mt-4 w-full py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs font-bold rounded-lg transition-colors">
+                  Contact Auditor
+                </button>
+              </div>
+
+            </div>
+          </div>
+
+        </ng-container>
       </div>
-
-      <div class="content-grid">
-
-        <!-- Left Column -->
-        <div class="left-column">
-
-          <!-- Case Summary -->
-          <div class="card">
-            <div class="card-header">
-              <h2>Audit Case Summary</h2>
-            </div>
-
-            <div class="summary-grid">
-              <div class="summary-item">
-                <span class="label">Case ID</span>
-                <span class="value">{{ caseData.case_id }}</span>
-              </div>
-              <div class="summary-item">
-                <span class="label">Status</span>
-                <span class="value">{{ caseData.status }}</span>
-              </div>
-              <div class="summary-item">
-                <span class="label">Risk Level</span>
-                <span class="value">{{ riskText }}</span>
-              </div>
-              <div class="summary-item">
-                <span class="label">Final Verdict</span>
-                <span class="value">{{ verdictText }}</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Original Note -->
-          <div class="card">
-            <div class="card-header">
-              <h2>Original Clinical Note</h2>
-            </div>
-            <div class="note-box">
-              Subjective: Patient presents with recurring abdominal pain localized to the right lower quadrant over the past 48 hours. Intensity 7/10. Reports nausea but no vomiting.
-
-              Objective: Temp 101.2F, BP 130/85, HR 92. Guarding noted on palpation of RLQ. Positive McBurney's sign. Psoas sign inconclusive.
-
-              Assessment: Suspected acute appendicitis vs mesenteric adenitis.
-
-              Plan: Ordered CBC, CMP, and CT abdomen/pelvis with IV contrast. Patient advised to remain NPO. Surgical consult paged. Patient to be monitored for signs of perforation.
-            </div>
-          </div>
-
-          <!-- Human Review Panel -->
-          <div class="card human-review-card" *ngIf="showHumanReview">
-            <div class="card-header">
-              <h2>Human Review Required</h2>
-            </div>
-
-            <p class="review-desc">
-              This case is currently marked as <strong>PENDING REVIEW</strong>.
-              Please review and submit your decision.
-            </p>
-
-            <div class="form-group">
-              <label for="reviewerId">Reviewer ID</label>
-              <input
-                id="reviewerId"
-                type="text"
-                [(ngModel)]="reviewerId"
-                placeholder="Enter reviewer ID"
-              />
-            </div>
-
-            <div class="form-group">
-              <label>Decision</label>
-              <div class="radio-group">
-                <label class="radio-option">
-                  <input type="radio" name="decision" value="AGREE" [(ngModel)]="decision" />
-                  <span>AGREE</span>
-                </label>
-
-                <label class="radio-option">
-                  <input type="radio" name="decision" value="DISAGREE" [(ngModel)]="decision" />
-                  <span>DISAGREE</span>
-                </label>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="comments">Comments</label>
-              <textarea
-                id="comments"
-                rows="5"
-                [(ngModel)]="comments"
-                placeholder="Enter reviewer comments"
-              ></textarea>
-            </div>
-
-            <div *ngIf="submitMessage" class="success-box">
-              {{ submitMessage }}
-            </div>
-
-            <div *ngIf="submitError" class="error-box">
-              {{ submitError }}
-            </div>
-
-            <button class="primary-btn" (click)="submitHumanReview()" [disabled]="submitting">
-              {{ submitting ? 'Submitting...' : 'Submit Human Review' }}
-            </button>
-          </div>
-
-        </div>
-
-        <!-- Right Column -->
-        <div class="right-column">
-          <div class="card">
-            <div class="card-header">
-              <h3>Audit Summary</h3>
-            </div>
-
-            <div class="summary-side">
-              <div class="summary-row">
-                <span>Compliance Status</span>
-                <strong>{{ verdictText }}</strong>
-              </div>
-              <div class="summary-row">
-                <span>Risk Severity</span>
-                <strong>{{ riskText }}</strong>
-              </div>
-              <div class="summary-row">
-                <span>Case Status</span>
-                <strong>{{ caseData.status }}</strong>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </ng-container>
+    </main>
   </div>
 </div>
