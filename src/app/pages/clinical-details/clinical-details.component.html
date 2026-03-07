@@ -150,20 +150,54 @@ Plan: Ordered CBC, CMP, and CT abdomen/pelvis with IV contrast. Patient advised 
                 </div>
 
                 <div class="p-6">
-                  <p class="text-[#111418] dark:text-slate-300 text-base leading-relaxed">
-                    This case has been assessed by the audit pipeline. Please review the summary and, if required,
-                    complete the human review below.
-                  </p>
 
-                  <div
-                    class="mt-4 p-4 bg-primary/5 dark:bg-primary/10 border-l-4 border-primary rounded-r-lg">
-                    <p class="text-primary font-semibold text-sm mb-1 uppercase tracking-wider">
-                      Required Corrective Action
-                    </p>
-                    <p class="text-slate-700 dark:text-slate-300 text-sm">
-                      Review the case findings and confirm whether the audit result should be accepted or rejected.
-                    </p>
+                  <div *ngIf="explanationLoading" class="text-sm text-slate-500 dark:text-slate-400">
+                    Loading AI explanation...
                   </div>
+
+                  <div *ngIf="explanationData && !explanationLoading">
+                    <p class="text-[#111418] dark:text-slate-300 text-base leading-relaxed mb-4">
+                      {{ explanationData.summary }}
+                    </p>
+
+                    <div class="mb-4">
+                      <p class="text-primary font-semibold text-sm mb-2 uppercase tracking-wider">
+                        Confidence Score
+                      </p>
+                      <p class="text-slate-700 dark:text-slate-300 text-sm">
+                        {{ explanationData.confidence }}
+                      </p>
+                    </div>
+
+                    <div class="mb-4" *ngIf="explanationData.compliance_findings?.length">
+                      <p class="text-primary font-semibold text-sm mb-2 uppercase tracking-wider">
+                        Compliance Findings
+                      </p>
+                      <ul class="list-disc ml-5 text-slate-700 dark:text-slate-300 text-sm space-y-1">
+                        <li *ngFor="let item of explanationData.compliance_findings">{{ item }}</li>
+                      </ul>
+                    </div>
+
+                    <div class="mb-4" *ngIf="explanationData.consistency_findings?.length">
+                      <p class="text-primary font-semibold text-sm mb-2 uppercase tracking-wider">
+                        Consistency Findings
+                      </p>
+                      <ul class="list-disc ml-5 text-slate-700 dark:text-slate-300 text-sm space-y-1">
+                        <li *ngFor="let item of explanationData.consistency_findings">{{ item }}</li>
+                      </ul>
+                    </div>
+
+                    <div class="mt-4 p-4 bg-primary/5 dark:bg-primary/10 border-l-4 border-primary rounded-r-lg"
+                        *ngIf="explanationData.risk_findings?.length">
+                      <p class="text-primary font-semibold text-sm mb-2 uppercase tracking-wider">
+                        Risk Findings
+                      </p>
+                      <ul class="list-disc ml-5 text-slate-700 dark:text-slate-300 text-sm space-y-1">
+                        <li *ngFor="let item of explanationData.risk_findings">{{ item }}</li>
+                      </ul>
+                    </div>
+                  </div>
+
                 </div>
               </div>
 

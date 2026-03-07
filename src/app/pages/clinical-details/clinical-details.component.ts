@@ -17,6 +17,16 @@ interface AuditCase {
   updated_by: string | null;
 }
 
+interface AuditExplanation {
+  case_id: string;
+  final_verdict: string;
+  confidence: number;
+  compliance_findings: string[];
+  consistency_findings: string[];
+  risk_findings: string[];
+  summary: string;
+}
+
 @Component({
   selector: 'app-clinical-details',
   standalone: true,
@@ -33,6 +43,8 @@ export class ClinicalDetailsComponent implements OnInit {
 
   caseData: AuditCase | null = null;
   loading = true;
+  explanationData: AuditExplanation | null = null;
+  explanationLoading = false;
   errorMessage = '';
 
   showHumanReview = false;
@@ -60,27 +72,45 @@ export class ClinicalDetailsComponent implements OnInit {
   loadCase(caseId: string): void {
     this.loading = true;
     this.errorMessage = '';
+    this.explanationLoading = true;
+    this.explanationData = null;
     this.cd.detectChanges();
 
-    const url = `${this.apiBaseUrl}/audit-cases/${caseId}`;
-    console.log('Calling API:', url);
+    const caseUrl = `${this.apiBaseUrl}/audit-cases/${caseId}`;
+    const explanationUrl = `${this.apiBaseUrl}/audit-cases/${caseId}/explanation`;
 
-    this.http.get<AuditCase>(url).subscribe({
+    console.log('Calling case API:', caseUrl);
+    console.log('Calling explanation API:', explanationUrl);
+
+    this.http.get<AuditCase>(caseUrl).subscribe({
       next: (data) => {
-        console.log('API success:', data);
+        console.log('Case API success:', data);
 
         this.caseData = data;
         this.showHumanReview = data.status === 'PENDING REVIEW';
         this.loading = false;
-
         this.cd.detectChanges();
+
+        this.http.get<AuditExplanation>(explanationUrl).subscribe({
+          next: (explanation) => {
+            console.log('Explanation API success:', explanation);
+            this.explanationData = explanation;
+            this.explanationLoading = false;
+            this.cd.detectChanges();
+          },
+          error: (err) => {
+            console.error('Explanation API error:', err);
+            this.explanationLoading = false;
+            this.cd.detectChanges();
+          }
+        });
       },
       error: (err) => {
-        console.error('API error:', err);
+        console.error('Case API error:', err);
 
         this.errorMessage = err?.error?.error || 'Failed to load case details.';
         this.loading = false;
-
+        this.explanationLoading = false;
         this.cd.detectChanges();
       }
     });
