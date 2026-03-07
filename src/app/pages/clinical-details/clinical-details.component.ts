@@ -21,10 +21,10 @@ interface AuditExplanation {
   case_id: string;
   final_verdict: string;
   confidence: number;
+  agent1_summary: string;
   compliance_findings: string[];
   consistency_findings: string[];
   risk_findings: string[];
-  summary: string;
 }
 
 @Component({

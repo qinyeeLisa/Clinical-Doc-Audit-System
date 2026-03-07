@@ -3,11 +3,6 @@
     <main class="flex-1 overflow-y-auto">
       <div class="mx-auto max-w-[1200px] w-full px-4 py-8">
 
-        <!-- Debug loading state -->
-        <!-- <div class="mb-4 text-black text-sm font-bold">
-          loading = {{ loading }}
-        </div> -->
-
         <!-- Loading -->
         <div *ngIf="loading"
           class="mb-4 rounded-lg bg-blue-50 border border-blue-200 text-blue-700 px-4 py-3 text-sm font-medium">
@@ -21,27 +16,27 @@
         </div>
 
         <ng-container *ngIf="caseData && !loading">
-      <!-- Breadcrumbs -->
-      <div class="flex flex-wrap gap-2 pb-4">
-          <!-- Audits -->
-          <a
-            routerLink="/submit-notes"
-            class="text-[#617589] text-sm font-medium leading-normal hover:text-primary cursor-pointer">
-            Audits
-          </a>
-          <span class="text-[#617589] text-sm font-medium leading-normal">/</span>
-          <!-- Clinical History -->
-          <a
-            routerLink="/clinical-history"
-            class="text-[#617589] text-sm font-medium leading-normal hover:text-primary cursor-pointer">
-            Clinical History
-          </a>
-          <span class="text-[#617589] text-sm font-medium leading-normal">/</span>
-          <!-- Current Case -->
-          <span class="text-[#111418] dark:text-white text-sm font-medium leading-normal">
-            {{ caseData.case_id }}
-          </span>
-      </div>
+
+          <!-- Breadcrumbs -->
+          <div class="flex flex-wrap gap-2 pb-4">
+            <a
+              routerLink="/submit-notes"
+              class="text-[#617589] text-sm font-medium leading-normal hover:text-primary cursor-pointer">
+              Audits
+            </a>
+            <span class="text-[#617589] text-sm font-medium leading-normal">/</span>
+
+            <a
+              routerLink="/clinical-history"
+              class="text-[#617589] text-sm font-medium leading-normal hover:text-primary cursor-pointer">
+              Clinical History
+            </a>
+            <span class="text-[#617589] text-sm font-medium leading-normal">/</span>
+
+            <span class="text-[#111418] dark:text-white text-sm font-medium leading-normal">
+              {{ caseData.case_id }}
+            </span>
+          </div>
 
           <!-- Page Heading -->
           <div class="flex flex-wrap justify-between items-start gap-3 py-6">
@@ -89,10 +84,8 @@
             <div class="lg:col-span-2 flex flex-col gap-8">
 
               <!-- Audit Case Summary -->
-              <div
-                class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
-                <div
-                  class="border-b border-slate-100 dark:border-slate-800 px-6 py-4 bg-slate-50/50 dark:bg-slate-800/50">
+              <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+                <div class="border-b border-slate-100 dark:border-slate-800 px-6 py-4 bg-slate-50/50 dark:bg-slate-800/50">
                   <h2 class="text-[#111418] dark:text-white text-[18px] font-bold">Audit Case Summary</h2>
                 </div>
 
@@ -116,18 +109,15 @@
                 </div>
               </div>
 
-              <!-- Original Note Section -->
-              <div
-                class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
-                <div
-                  class="border-b border-slate-100 dark:border-slate-800 px-6 py-4 flex justify-between items-center bg-slate-50/50 dark:bg-slate-800/50">
+              <!-- Original Note -->
+              <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+                <div class="border-b border-slate-100 dark:border-slate-800 px-6 py-4 flex justify-between items-center bg-slate-50/50 dark:bg-slate-800/50">
                   <h2 class="text-[#111418] dark:text-white text-[18px] font-bold">Original Clinical Note</h2>
                   <span class="text-xs text-slate-500 font-medium">Character Count: 1,420</span>
                 </div>
 
                 <div class="p-6">
-                  <div
-                    class="bg-slate-50 dark:bg-slate-800/30 rounded-lg p-6 border border-slate-100 dark:border-slate-800 min-h-[300px]">
+                  <div class="bg-slate-50 dark:bg-slate-800/30 rounded-lg p-6 border border-slate-100 dark:border-slate-800 min-h-[300px]">
                     <p class="text-[#111418] dark:text-slate-200 text-base leading-relaxed whitespace-pre-wrap font-display">
 Subjective: Patient presents with recurring abdominal pain localized to the right lower quadrant over the past 48 hours. Intensity 7/10. Reports nausea but no vomiting.
 
@@ -141,11 +131,9 @@ Plan: Ordered CBC, CMP, and CT abdomen/pelvis with IV contrast. Patient advised 
                 </div>
               </div>
 
-              <!-- Explanation / Findings Section -->
-              <div
-                class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
-                <div
-                  class="border-b border-slate-100 dark:border-slate-800 px-6 py-4 bg-slate-50/50 dark:bg-slate-800/50">
+              <!-- Auditor Detailed Explanation -->
+              <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+                <div class="border-b border-slate-100 dark:border-slate-800 px-6 py-4 bg-slate-50/50 dark:bg-slate-800/50">
                   <h2 class="text-[#111418] dark:text-white text-[18px] font-bold">Auditor Detailed Explanation</h2>
                 </div>
 
@@ -156,11 +144,16 @@ Plan: Ordered CBC, CMP, and CT abdomen/pelvis with IV contrast. Patient advised 
                   </div>
 
                   <div *ngIf="explanationData && !explanationLoading">
-                    <p class="text-[#111418] dark:text-slate-300 text-base leading-relaxed mb-4">
-                      {{ explanationData.summary }}
-                    </p>
 
-                    <div class="mb-4">
+                    <!-- Agent 1 Summary in blue banner -->
+                    <div class="mt-2 p-4 bg-primary/5 dark:bg-primary/10 border-l-4 border-primary rounded-r-lg mb-6">
+                      <p class="text-primary font-semibold text-sm mb-2 uppercase tracking-wider">
+                        Agent 1 Aggregate Summary
+                      </p>
+                      <p class="text-slate-700 dark:text-slate-300 text-sm mb-4">
+                        {{ explanationData.agent1_summary }}
+                      </p>
+
                       <p class="text-primary font-semibold text-sm mb-2 uppercase tracking-wider">
                         Confidence Score
                       </p>
@@ -169,33 +162,36 @@ Plan: Ordered CBC, CMP, and CT abdomen/pelvis with IV contrast. Patient advised 
                       </p>
                     </div>
 
-                    <div class="mb-4" *ngIf="explanationData.compliance_findings?.length">
+                    <!-- Agent 4 Compliance -->
+                    <div class="mb-5">
                       <p class="text-primary font-semibold text-sm mb-2 uppercase tracking-wider">
-                        Compliance Findings
+                        Agent 4 Compliance Findings
                       </p>
                       <ul class="list-disc ml-5 text-slate-700 dark:text-slate-300 text-sm space-y-1">
                         <li *ngFor="let item of explanationData.compliance_findings">{{ item }}</li>
                       </ul>
                     </div>
 
-                    <div class="mb-4" *ngIf="explanationData.consistency_findings?.length">
+                    <!-- Agent 3 Consistency -->
+                    <div class="mb-5">
                       <p class="text-primary font-semibold text-sm mb-2 uppercase tracking-wider">
-                        Consistency Findings
+                        Agent 3 Consistency Findings
                       </p>
                       <ul class="list-disc ml-5 text-slate-700 dark:text-slate-300 text-sm space-y-1">
                         <li *ngFor="let item of explanationData.consistency_findings">{{ item }}</li>
                       </ul>
                     </div>
 
-                    <div class="mt-4 p-4 bg-primary/5 dark:bg-primary/10 border-l-4 border-primary rounded-r-lg"
-                        *ngIf="explanationData.risk_findings?.length">
+                    <!-- Agent 5 Risk -->
+                    <div class="mb-2">
                       <p class="text-primary font-semibold text-sm mb-2 uppercase tracking-wider">
-                        Risk Findings
+                        Agent 5 Risk Findings
                       </p>
                       <ul class="list-disc ml-5 text-slate-700 dark:text-slate-300 text-sm space-y-1">
                         <li *ngFor="let item of explanationData.risk_findings">{{ item }}</li>
                       </ul>
                     </div>
+
                   </div>
 
                 </div>
@@ -204,8 +200,7 @@ Plan: Ordered CBC, CMP, and CT abdomen/pelvis with IV contrast. Patient advised 
               <!-- Human Review Panel -->
               <div *ngIf="showHumanReview"
                 class="bg-white dark:bg-slate-900 rounded-xl border-2 border-amber-400 dark:border-amber-500 shadow-sm overflow-hidden">
-                <div
-                  class="border-b border-slate-100 dark:border-slate-800 px-6 py-4 bg-amber-50/60 dark:bg-amber-900/10">
+                <div class="border-b border-slate-100 dark:border-slate-800 px-6 py-4 bg-amber-50/60 dark:bg-amber-900/10">
                   <h2 class="text-[#111418] dark:text-white text-[18px] font-bold">Human Review Required</h2>
                 </div>
 
@@ -281,8 +276,7 @@ Plan: Ordered CBC, CMP, and CT abdomen/pelvis with IV contrast. Patient advised 
             <div class="flex flex-col gap-6">
 
               <!-- Audit Summary -->
-              <div
-                class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm p-6">
+              <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm p-6">
                 <h3 class="text-[#111418] dark:text-white text-lg font-bold mb-4">Audit Summary</h3>
 
                 <div class="space-y-4">
@@ -316,8 +310,7 @@ Plan: Ordered CBC, CMP, and CT abdomen/pelvis with IV contrast. Patient advised 
               </div>
 
               <!-- Assigned Auditor -->
-              <div
-                class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm p-6">
+              <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm p-6">
                 <h3 class="text-[#111418] dark:text-white text-sm font-bold mb-4 uppercase tracking-wider opacity-60">
                   Assigned Auditor
                 </h3>
