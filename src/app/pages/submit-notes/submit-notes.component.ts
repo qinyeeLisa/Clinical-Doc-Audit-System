@@ -1,14 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
 import { API_URL } from '../../constants';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-submit-notes',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './submit-notes.component.html',
   styleUrls: ['./submit-notes.component.css'],
 })
@@ -23,6 +22,7 @@ export class SubmitNotesComponent {
   modalTitle = '';
   modalMessage = '';
   modalType: 'success' | 'error' = 'success';
+  isSubmitting = false;
 
   ngOnInit(): void {
     this.getPatientsData();
@@ -35,6 +35,7 @@ export class SubmitNotesComponent {
 
   onSubmit(): void {
     if (this.auditCaseForm.valid) {
+      this.isSubmitting = true;
       const formValue = this.auditCaseForm.value;
 
       const payload = {
@@ -55,6 +56,7 @@ export class SubmitNotesComponent {
           this.showModal = true;
 
           this.auditCaseForm.reset();
+          this.isSubmitting = false;
         },
         error => {
           console.error('Error submitting note', error);
@@ -63,6 +65,7 @@ export class SubmitNotesComponent {
           this.modalMessage = 'Something went wrong while submitting the note. Please try again.';
           this.modalType = 'error';
           this.showModal = true;
+          this.isSubmitting = false;
         }
       );
 
