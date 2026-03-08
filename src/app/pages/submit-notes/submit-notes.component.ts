@@ -38,9 +38,9 @@ export class SubmitNotesComponent {
       const formValue = this.auditCaseForm.value;
 
       const payload = {
-        user_id: 'user_123',
+        user_id: 'user_1',
         patient_id: formValue.patient,
-        raw_note_text: formValue.auditNotes
+        doctor_notes: formValue.auditNotes
       };
 
       console.log('Submitting payload', payload);
