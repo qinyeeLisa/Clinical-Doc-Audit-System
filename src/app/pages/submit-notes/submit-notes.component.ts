@@ -38,7 +38,7 @@ export class SubmitNotesComponent {
       const formValue = this.auditCaseForm.value;
 
       const payload = {
-        user_id: 'user_1',
+        user_id: 'user_123',
         patient_id: formValue.patient,
         doctor_notes: formValue.auditNotes
       };
