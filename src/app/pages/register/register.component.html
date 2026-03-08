@@ -17,7 +17,7 @@
     <div class="relative flex min-h-90vh flex-col overflow-x-hidden">
         <main class="flex flex-1 items-center justify-center px-4 py-12">
             <div
-                class="w-full max-w-[480px] bg-white dark:bg-[#1c2631] rounded-xl shadow-sm border border-gray-100 dark:border-gray-800 overflow-hidden">
+                class="w-full max-w-[650px] bg-white dark:bg-[#1c2631] rounded-xl shadow-sm border border-gray-100 dark:border-gray-800 overflow-hidden">
                 <!-- Headline Section -->
                 <div class="pt-10 pb-4 px-8 text-center">
                     <h1 class="text-[#111418] dark:text-white tracking-light text-[32px] font-bold leading-tight pb-3">
@@ -27,6 +27,17 @@
                 </div>
                 <!-- Registration Form -->
                 <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="px-8 flex flex-col gap-4">
+                    <!-- Name Field -->
+                    <div class="flex flex-col gap-2">
+                        <label>Full Name</label>
+                        <input type="text" placeholder="e.g. Dr. John Smith" formControlName="name"
+                            class="form-input flex w-full rounded-lg text-[#111418] dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-[#dbe0e6] dark:border-gray-700 bg-white dark:bg-[#101922] h-14 placeholder:text-[#617589] p-[15px] text-base font-normal" />
+                        <div *ngIf="registerForm.get('name')?.invalid && registerForm.get('name')?.touched"
+                            class="text-red-500 text-sm">
+                            Please enter your full name
+                        </div>
+                    </div>
+
                     <!-- Email Field -->
                     <div class="flex flex-col gap-2">
                         <label>Email Address</label>
@@ -38,11 +49,36 @@
                         </div>
                     </div>
 
+                    <!-- Contact Number Field -->
+                    <div class="flex flex-col gap-2">
+                        <label>Contact Number</label>
+                        <input type="tel" placeholder="e.g. +65 1234 5678" formControlName="contactNo"
+                            class="form-input flex w-full rounded-lg text-[#111418] dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-[#dbe0e6] dark:border-gray-700 bg-white dark:bg-[#101922] h-14 placeholder:text-[#617589] p-[15px] text-base font-normal" />
+                        <div *ngIf="registerForm.get('contactNo')?.invalid && registerForm.get('contactNo')?.touched"
+                            class="text-red-500 text-sm">
+                            Please enter a valid contact number
+                        </div>
+                    </div>
+
+                    <!-- Role Field -->
+                    <div class="flex flex-col gap-2">
+                        <label>Role</label>
+                        <select formControlName="role"
+                            class="form-input flex w-full rounded-lg text-[#111418] dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-[#dbe0e6] dark:border-gray-700 bg-white dark:bg-[#101922] h-14 p-[15px] text-base font-normal">
+                            <option value="" disabled selected>Select your role</option>
+                            <option value="auditor">Auditor</option>
+                            <option value="reviewer">Reviewer</option>
+                        </select>
+                        <div *ngIf="registerForm.get('role')?.invalid && registerForm.get('role')?.touched"
+                            class="text-red-500 text-sm">
+                            Please select a role
+                        </div>
+                    </div>
+
                     <!-- Password Field -->
                     <div class="flex flex-col gap-2">
                         <div class="flex justify-between items-center">
                             <label>Password</label>
-                            <a href="#" class="text-primary text-sm font-medium hover:underline">Forgot password?</a>
                         </div>
                         <div class="relative flex w-full items-stretch rounded-lg">
                             <input [type]="hidePassword ? 'password' : 'text'" placeholder="Create a strong password"
@@ -60,30 +96,6 @@
                             Password is required
                         </div>
                     </div>
-
-                    <div class="flex flex-col gap-2">
-                        <div class="flex justify-between items-center">
-                            <label>Confirm Password</label>
-                            <a href="#" class="text-primary text-sm font-medium hover:underline">Repeat password?</a>
-                        </div>
-                        <div class="relative flex w-full items-stretch rounded-lg">
-                            <input [type]="hidePassword ? 'password' : 'text'" placeholder="Enter your password"
-                                formControlName="password"
-                                class="form-input flex w-full rounded-lg text-[#111418] dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-[#dbe0e6] dark:border-gray-700 bg-white dark:bg-[#101922] h-14 placeholder:text-[#617589] p-[15px] text-base font-normal" />
-                            <div class="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer"
-                                (click)="togglePassword()">
-                                <span class="material-symbols-outlined">
-                                    {{ hidePassword ? 'visibility' : 'visibility_off' }}
-                                </span>
-                            </div>
-                        </div>
-                        <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched"
-                            class="text-red-500 text-sm">
-                            Password is required
-                        </div>
-                    </div>
-
-
 
                     <!-- Terms and Conditions (Generated Component) -->
                     <div class="flex items-start gap-3 py-2">
@@ -111,20 +123,6 @@
                         Already have an account?
                         <a class="text-primary font-semibold hover:underline" routerLink="/login">Login here</a>
                     </p>
-                </div>
-
-                <!-- Footer/Branding sub-info -->
-                <div class="bg-gray-50 dark:bg-[#15202b] px-8 py-4 border-t border-gray-100 dark:border-gray-800">
-                    <div class="flex items-center justify-center gap-4 text-[#617589] dark:text-gray-500 text-xs">
-                        <div class="flex items-center gap-1">
-                            <span class="material-symbols-outlined text-sm">lock</span>
-                            HIPAA Compliant
-                        </div>
-                        <div class="flex items-center gap-1">
-                            <span class="material-symbols-outlined text-sm">verified_user</span>
-                            256-bit Encryption
-                        </div>
-                    </div>
                 </div>
             </div>
         </main>

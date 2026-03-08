@@ -5,7 +5,7 @@ export const routes: Routes = [
         path: '',
         pathMatch: 'full',
         loadComponent: () => {
-            return import('./pages/submit-notes/submit-notes.component').then(m => m.SubmitNotesComponent);
+            return import('./pages/register/register.component').then(m => m.RegisterComponent);
         }
     },
     {
