@@ -11,6 +11,8 @@ interface AuditCase {
   status: string;
   risk_level: string | null;
   final_verdict: string | null;
+  doctor_notes: string | null;
+  orchestrator_summary?: string | null;
   created_at: string;
   updated_at: string;
   created_by: string;

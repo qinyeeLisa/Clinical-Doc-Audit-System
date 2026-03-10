@@ -113,19 +113,12 @@
               <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
                 <div class="border-b border-slate-100 dark:border-slate-800 px-6 py-4 flex justify-between items-center bg-slate-50/50 dark:bg-slate-800/50">
                   <h2 class="text-[#111418] dark:text-white text-[18px] font-bold">Original Clinical Note</h2>
-                  <span class="text-xs text-slate-500 font-medium">Character Count: 1,420</span>
+                  <span class="text-xs text-slate-500 font-medium">Character Count: {{ (caseData.doctor_notes || '').length }}</span>
                 </div>
 
                 <div class="p-6">
                   <div class="bg-slate-50 dark:bg-slate-800/30 rounded-lg p-6 border border-slate-100 dark:border-slate-800 min-h-[300px]">
-                    <p class="text-[#111418] dark:text-slate-200 text-base leading-relaxed whitespace-pre-wrap font-display">
-Subjective: Patient presents with recurring abdominal pain localized to the right lower quadrant over the past 48 hours. Intensity 7/10. Reports nausea but no vomiting.
-
-Objective: Temp 101.2F, BP 130/85, HR 92. Guarding noted on palpation of RLQ. Positive McBurney's sign. Psoas sign inconclusive.
-
-Assessment: Suspected acute appendicitis vs mesenteric adenitis.
-
-Plan: Ordered CBC, CMP, and CT abdomen/pelvis with IV contrast. Patient advised to remain NPO. Surgical consult paged. Patient to be monitored for signs of perforation.
+                    <p class="text-[#111418] dark:text-slate-200 text-base leading-relaxed whitespace-pre-wrap font-display">{{ caseData.doctor_notes || 'No clinical note available.' }}
                     </p>
                   </div>
                 </div>
