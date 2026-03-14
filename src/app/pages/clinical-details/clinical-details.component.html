@@ -173,16 +173,6 @@
                       </p>
                     </div>
 
-                    <!-- Agent 4 Compliance -->
-                    <div class="mb-5">
-                      <p class="text-primary font-semibold text-sm mb-2 uppercase tracking-wider">
-                        Agent 4 Compliance Findings
-                      </p>
-                      <ul class="list-disc ml-5 text-slate-700 dark:text-slate-300 text-sm space-y-1">
-                        <li *ngFor="let item of explanationData.compliance_findings">{{ item }}</li>
-                      </ul>
-                    </div>
-
                     <!-- Agent 3 Consistency -->
                     <div class="mb-5">
                       <p class="text-primary font-semibold text-sm mb-2 uppercase tracking-wider">
@@ -190,6 +180,16 @@
                       </p>
                       <ul class="list-disc ml-5 text-slate-700 dark:text-slate-300 text-sm space-y-1">
                         <li *ngFor="let item of explanationData.consistency_findings">{{ item }}</li>
+                      </ul>
+                    </div>
+
+                    <!-- Agent 4 Compliance -->
+                    <div class="mb-5">
+                      <p class="text-primary font-semibold text-sm mb-2 uppercase tracking-wider">
+                        Agent 4 Compliance Findings
+                      </p>
+                      <ul class="list-disc ml-5 text-slate-700 dark:text-slate-300 text-sm space-y-1">
+                        <li *ngFor="let item of explanationData.compliance_findings">{{ item }}</li>
                       </ul>
                     </div>
 
