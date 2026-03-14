@@ -149,26 +149,6 @@
 
 </html>
 
-<div *ngIf="showModal" class="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
-
-    <div class="bg-white dark:bg-[#101922] rounded-lg p-6 w-96 shadow-lg">
-
-        <h2 class="text-lg font-semibold mb-4" [ngClass]="{
-          'text-green-600': modalType === 'success',
-          'text-red-600': modalType === 'error'
-        }">
-            {{ modalTitle }}
-        </h2>
-
-        <p class="text-sm mb-6">
-            {{ modalMessage }}
-        </p>
-
-        <div class="flex justify-end">
-            <button (click)="showModal = false" class="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700">
-                OK
-            </button>
-        </div>
-
-    </div>
-</div>
+<app-shared-modal [showModal]="showModal" [modalTitle]="modalTitle" [modalMessage]="modalMessage"
+    [modalType]="modalType" (closeModal)="onCloseModal()">
+</app-shared-modal>

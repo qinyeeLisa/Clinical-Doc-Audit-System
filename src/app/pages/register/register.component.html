@@ -129,3 +129,7 @@
 
     </div>
 </body>
+
+<app-shared-modal [showModal]="showModal" [modalTitle]="modalTitle" [modalMessage]="modalMessage"
+    [modalType]="modalType" (closeModal)="onCloseModal()">
+</app-shared-modal>
