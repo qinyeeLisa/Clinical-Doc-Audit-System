@@ -3,11 +3,12 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { API_URL } from '../../constants';
 import { HttpClient } from '@angular/common/http';
+import { SharedModalComponent } from '../../components/shared/shared-modal.component';
 
 @Component({
   selector: 'app-submit-notes',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, SharedModalComponent],
   templateUrl: './submit-notes.component.html',
   styleUrls: ['./submit-notes.component.css'],
 })
@@ -80,5 +81,9 @@ export class SubmitNotesComponent {
       this.cd.detectChanges();
 
     });
+  }
+
+  onCloseModal(): void {
+    this.showModal = false;
   }
 }
