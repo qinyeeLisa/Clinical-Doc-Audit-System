@@ -60,6 +60,10 @@ export class ClinicalDetailsComponent implements OnInit {
   submitMessage = '';
   submitError = '';
 
+  rerunning = false;
+  rerunMessage = '';
+  rerunError = '';
+
   ngOnInit(): void {
     // Keep userId in sync with the current logged-in user
     this.auth.userId$.subscribe(id => {
@@ -125,6 +129,43 @@ export class ClinicalDetailsComponent implements OnInit {
       }
     });
   }
+
+  rerunAudit(): void {
+  if (!this.caseData) return;
+
+  this.rerunning = true;
+  this.rerunMessage = '';
+  this.rerunError = '';
+  this.submitMessage = '';
+  this.submitError = '';
+  this.cd.detectChanges();
+
+  const payload = {
+    case_id: this.caseData.case_id,
+    patient_id: this.caseData.patient_id,
+    user_id: this.caseData.user_id,
+    doctor_notes: this.caseData.doctor_notes
+  };
+
+  this.http.post<any>(`${this.apiBaseUrl}/audit-cases`, payload).subscribe({
+    next: (response) => {
+      console.log('Re-run success:', response);
+
+      const newRunId = response?.agent1_result?.run_id || 'new run';
+      this.rerunMessage = `Audit re-run started successfully. Latest run: ${newRunId}`;
+      this.rerunning = false;
+      this.cd.detectChanges();
+
+      this.loadCase(this.caseData!.case_id);
+    },
+    error: (err) => {
+      console.error('Re-run error:', err);
+      this.rerunError = err?.error?.error || 'Failed to re-run audit.';
+      this.rerunning = false;
+      this.cd.detectChanges();
+    }
+  });
+}
 
   submitHumanReview(): void {
     if (!this.caseData) return;

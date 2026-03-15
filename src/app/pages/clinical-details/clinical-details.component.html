@@ -15,6 +15,16 @@
           {{ errorMessage }}
         </div>
 
+        <div *ngIf="rerunMessage"
+          class="mb-4 rounded-lg bg-green-50 border border-green-200 text-green-700 px-4 py-3 text-sm font-medium">
+          {{ rerunMessage }}
+        </div>
+
+        <div *ngIf="rerunError"
+          class="mb-4 rounded-lg bg-red-50 border border-red-200 text-red-700 px-4 py-3 text-sm font-medium">
+          {{ rerunError }}
+        </div>
+
         <ng-container *ngIf="caseData && !loading">
 
           <!-- Breadcrumbs -->
@@ -42,18 +52,18 @@
           <div class="flex flex-wrap justify-between items-start gap-3 py-6">
             <div class="flex min-w-72 flex-col gap-2">
               <div class="flex items-center gap-3 flex-wrap">
-                <h1 class="text-[#111418] dark:text-white text-4xl font-black leading-tight tracking-[-0.033em]">
+                <h1 class="text-[#111418] dark:text-[#617589] text-4xl font-black leading-tight tracking-[-0.033em]">
                   Clinical Record Audit: {{ caseData.case_id }}
                 </h1>
 
-                <span
+                <!-- <span
                   class="px-3 py-1 text-xs font-bold rounded-full uppercase tracking-wider"
                   [ngClass]="{
                     'bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400': caseData.status === 'PENDING REVIEW',
                     'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400': caseData.status === 'COMPLETED'
                   }">
                   {{ caseData.status }}
-                </span>
+                </span> -->
               </div>
 
               <p class="text-[#617589] text-base font-normal leading-normal">
@@ -74,6 +84,14 @@
                 class="flex min-w-[140px] cursor-pointer items-center justify-center gap-2 rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold shadow-sm hover:bg-primary/90 transition-all">
                 <span class="material-symbols-outlined text-lg">picture_as_pdf</span>
                 <span>Download PDF</span>
+              </button>
+
+              <button
+                class="flex min-w-[150px] cursor-pointer items-center justify-center gap-2 rounded-lg h-10 px-4 bg-amber-500 text-white text-sm font-bold shadow-sm hover:bg-amber-600 transition-all disabled:opacity-60 disabled:cursor-not-allowed"
+                (click)="rerunAudit()"
+                [disabled]="rerunning || loading || !caseData">
+                <span class="material-symbols-outlined text-lg">refresh</span>
+                <span>{{ rerunning ? 'Re-running...' : 'Re-Run Audit' }}</span>
               </button>
             </div>
           </div>
@@ -155,16 +173,6 @@
                       </p>
                     </div>
 
-                    <!-- Agent 4 Compliance -->
-                    <div class="mb-5">
-                      <p class="text-primary font-semibold text-sm mb-2 uppercase tracking-wider">
-                        Agent 4 Compliance Findings
-                      </p>
-                      <ul class="list-disc ml-5 text-slate-700 dark:text-slate-300 text-sm space-y-1">
-                        <li *ngFor="let item of explanationData.compliance_findings">{{ item }}</li>
-                      </ul>
-                    </div>
-
                     <!-- Agent 3 Consistency -->
                     <div class="mb-5">
                       <p class="text-primary font-semibold text-sm mb-2 uppercase tracking-wider">
@@ -172,6 +180,16 @@
                       </p>
                       <ul class="list-disc ml-5 text-slate-700 dark:text-slate-300 text-sm space-y-1">
                         <li *ngFor="let item of explanationData.consistency_findings">{{ item }}</li>
+                      </ul>
+                    </div>
+
+                    <!-- Agent 4 Compliance -->
+                    <div class="mb-5">
+                      <p class="text-primary font-semibold text-sm mb-2 uppercase tracking-wider">
+                        Agent 4 Compliance Findings
+                      </p>
+                      <ul class="list-disc ml-5 text-slate-700 dark:text-slate-300 text-sm space-y-1">
+                        <li *ngFor="let item of explanationData.compliance_findings">{{ item }}</li>
                       </ul>
                     </div>
 
