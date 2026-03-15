@@ -3,6 +3,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterModule } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 interface AuditCase {
   case_id: string;
@@ -42,12 +43,14 @@ export class ClinicalDetailsComponent implements OnInit {
   private cd = inject(ChangeDetectorRef);
 
   private apiBaseUrl = 'https://ai6nsomr0m.execute-api.ap-southeast-1.amazonaws.com';
+  private auth = inject(AuthService);
 
   caseData: AuditCase | null = null;
   loading = true;
   explanationData: AuditExplanation | null = null;
   explanationLoading = false;
   errorMessage = '';
+  userId: string | null = this.auth.userId;
 
   showHumanReview = false;
   reviewerId = 'U001';
@@ -58,6 +61,11 @@ export class ClinicalDetailsComponent implements OnInit {
   submitError = '';
 
   ngOnInit(): void {
+    // Keep userId in sync with the current logged-in user
+    this.auth.userId$.subscribe(id => {
+      this.userId = id;
+    });
+
     const caseId = this.route.snapshot.paramMap.get('case_id');
     console.log('Route case_id:', caseId);
 
