@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
-import { SharedModalComponent } from '../../components/shared/shared-modal.component';
+import { Router, RouterLink } from '@angular/router';
 import { API_URL } from '../../constants';
 import { HttpClient } from '@angular/common/http';
 
@@ -10,20 +9,19 @@ import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink, SharedModalComponent],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
   hidePassword = true;
-  showModal = false;
-  modalTitle = '';
-  modalMessage = '';
-  modalType: 'success' | 'error' = 'success';
+  errorMessage: string | null = null;
+  isLoading = false;
 
 
-  constructor(private fb: FormBuilder, private http: HttpClient) { }
+  constructor(private fb: FormBuilder, private http: HttpClient,
+    private cd: ChangeDetectorRef, private router: Router) { }
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({
@@ -32,42 +30,38 @@ export class RegisterComponent implements OnInit {
       contactNo: ['', [Validators.required, Validators.pattern(/^[0-9+\-\s()]+$/)]],
       role: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', Validators.required]
     });
   }
 
-  onSubmit(): void {
+  onRegister(): void {
     if (this.registerForm.valid) {
       const formValue = this.registerForm.value;
 
       const payload = {
-        user_id: 'user_123',
-        patient_id: formValue.patient,
-        doctor_notes: formValue.auditNotes
+        name: formValue.name,
+        email: formValue.email,
+        password: formValue.password,
+        contact_no: formValue.contactNo,
+        role: formValue.role
       };
 
-      this.http.post(`${API_URL}/audit-cases`, payload).subscribe(
+      this.http.post(`${API_URL}/users`, payload).subscribe(
         response => {
           console.log('User registered successfully', response);
-
-          this.modalTitle = 'Success';
-          this.modalMessage = 'User registered successfully.';
-          this.modalType = 'success';
-          this.showModal = true;
-
           this.registerForm.reset();
+          this.isLoading = false;
+          this.router.navigate(['/login']);
+
         },
         error => {
-          console.error('Error registering user', error);
-
-          this.modalTitle = 'Registration Failed';
-          this.modalMessage = 'Something went wrong while registering the user. Please try again.';
-          this.modalType = 'error';
-          this.showModal = true;
+          this.isLoading = false;
+          this.errorMessage =
+            error?.error?.message ||
+            'Registration failed. Please check your input and try again.';
+          this.cd.detectChanges();
         }
       );
 
-      this.registerForm.reset();
     } else {
       this.registerForm.markAllAsTouched();
     }
@@ -75,9 +69,5 @@ export class RegisterComponent implements OnInit {
 
   togglePassword(): void {
     this.hidePassword = !this.hidePassword;
-  }
-
-  onCloseModal(): void {
-    this.showModal = false;
   }
 }
